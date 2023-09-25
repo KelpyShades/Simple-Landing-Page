@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>U-NECT</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Righteous&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <div class="main">
+      <button class="signup1" onclick="myFunction2()">
+        <span>Click here to join</span>
+      </button>
+      <div class="intro">
+        <p class="introtext">
+          <span>Elevate Your</span>
+          <span>College Journey</span>
+          <span>With <b class="appname">U-NECT!</b></span>
+        </p>
+      </div>
+      <div class="bar"></div>
+      <div class="textbox" id="textbox">
+        <p>
+          Join <span>U-NECT</span>, the ultimate go to platform for college
+          students. Connect with like-minded peers and discover a vibrant
+          community of students offering the same or similar courses. Your
+          network is your net worth and <span>U-NECT</span>
+          empowers you to expand it, unlocking a wealth of connections and
+          limitless opportunities. Don't miss out the chance to level up your
+          college experience.
+        </p>
+      </div>
+      <div class="container" id="container">
+        <form action="" method="post" autocomplete="off" id="myForm">
+          <label for="email"><b>Email</b></label>
+          <input
+            type="email"
+            name="email"
+            id="email"
+            placeholder="Email..."
+            required
+          />
+          <label for="course"><b>Course </b></label>
+          <input
+            type="text"
+            name="course"
+            id="course"
+            placeholder="Course..."
+            required
+          />
+          <label for="university"><b>University</b></label>
+          <input
+            type="text"
+            name="university"
+            id="uni"
+            placeholder="University..."
+            required
+          />
+          <input
+            type="submit"
+            name="but"
+            value="Register"
+            id="emailForm"
+            onclick="myFunction1()"
+          />
+          <p class="text"><br />Be the first to know when we launch</p>
+        </form>
+      </div>
+    </div>
+    <div class="textandvid" id="textandvid">
+      <div>
+      <video class="vid" poster="assets/images/back1.jpg" controls>
+        <source src="assets/videos/vid.mp4" type="video/mp4">
+      </video>
+      <p class="text">Thank You For Registering...We Will Keep You Updated</p>
+      </div>
+    </div>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.7.1/firebase-firestore.js"></script>
+
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyCrIjLsAkZPDXBpR9Sd2onVxpP6ucpFkJY",
+        authDomain: "connectu-d583d.firebaseapp.com",
+        projectId: "connectu-d583d",
+        storageBucket: "connectu-d583d.appspot.com",
+        messagingSenderId: "40979615709",
+        appId: "1:40979615709:web:100b5b9bd094d8e031f034",
+        measurementId: "G-RKMBV3JGR4",
+      };
+      firebase.initializeApp(firebaseConfig);
+
+      const form = document.getElementById("myForm");
+      form.addEventListener("submit", (event) => {
+        event.preventDefault(); // Prevent the default form submission behavior
+
+        // Get the form input values
+        const email = form.email.value;
+        const course = form.course.value;
+        const university = form.university.value;
+
+        // Save the data to Firebase Firestore
+        const db = firebase.firestore();
+        db.collection("users")
+          .add({
+            email,
+            course,
+            university,
+          })
+          .then(() => {
+            alert("Data saved to Firestore");
+            // Perform any additional actions or show success message
+          })
+          .catch((error) => {
+            alert("Error saving data to Firestore: ", error);
+            // Handle the error appropriately
+          });
+
+        // Reset the form
+        form.reset();
+      });
+    </script>
+    <script src="Connect.js"></script>
+    <script src=" https://smtpjs.com/v3/smtp.js"></script>
+  </body>
+</html>
